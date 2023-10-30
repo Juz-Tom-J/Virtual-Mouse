@@ -3,6 +3,7 @@ import numpy as np
 import HandTrackingModule as htm
 import time
 import autopy
+import pyautogui
 
 wcam, hcam = 640, 480
 frameR = 100
@@ -43,6 +44,18 @@ while True:
             if length < 25:
                 autopy.mouse.click()
                 cv2.circle(img, (lineinfo[4], lineinfo[5]), 15, (0, 255, 0), cv2.FILLED)
+        if fingers[1] == 1 and fingers[2] == 1 and fingers[3] == 1 and fingers[4] == 1:
+            pyautogui.scroll(30)
+
+        if fingers[0] == 0 and fingers[1] == 0 and fingers[2] == 0 and fingers[3] == 0 and fingers[4] == 0:
+            pyautogui.scroll(-30)
+        if fingers[0] == 1 and fingers[1] == 1 and fingers[2] == 1:
+            pyautogui.rightClick()
+        if fingers[0] == 1 and fingers[1] == 0 and fingers[2] == 0 and fingers[3] == 0 and fingers[4] == 0:
+            pyautogui.press('left')
+        if fingers[0] == 0 and fingers[1] == 0 and fingers[2] == 0 and fingers[3] == 0 and fingers[4] == 1:
+            pyautogui.press('right')
+
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
